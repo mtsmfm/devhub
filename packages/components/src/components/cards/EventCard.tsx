@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { StyleSheet, View } from 'react-native'
+import _ from 'lodash'
 
 import {
   EnhancedGitHubEvent,
@@ -394,4 +395,4 @@ export const EventCard = React.memo((props: EventCardProps) => {
       )}
     </SpringAnimatedView>
   )
-})
+}, _.isEqual)
