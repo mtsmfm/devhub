@@ -101,6 +101,8 @@ export const NotificationCards = React.memo((props: NotificationCardsProps) => {
   )
   const saveItemsForLater = useReduxAction(actions.saveItemsForLater)
 
+  const showItemDetail = useReduxAction(actions.showItemDetail)
+
   useKeyPressCallback(
     's',
     useCallback(() => {
@@ -128,6 +130,24 @@ export const NotificationCards = React.memo((props: NotificationCardsProps) => {
         type: 'notifications',
         itemIds: [selectedItemIdRef.current!],
         unread: isItemRead(selectedItem),
+      })
+    }, [hasSelectedItem, items]),
+  )
+
+  useKeyPressCallback(
+    'Enter',
+    useCallback(() => {
+      const selectedItem =
+        hasSelectedItem &&
+        items.find(item => item.id === selectedItemIdRef.current)
+      if (!selectedItem) return
+
+      showItemDetail({
+        owner: selectedItem.repository.owner!.login,
+        repo: selectedItem.repository.name,
+        itemId: selectedItem.id,
+        pullRequestNumber:
+          selectedItem.pullRequest && selectedItem.pullRequest.number,
       })
     }, [hasSelectedItem, items]),
   )

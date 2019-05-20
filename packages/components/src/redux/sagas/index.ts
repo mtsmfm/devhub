@@ -6,6 +6,7 @@ import { columnsSagas } from './columns'
 import { configSagas } from './config'
 import { installationSagas } from './installations'
 import { subscriptionsSagas } from './subscriptions'
+import { threadsSagas } from './threads'
 
 export function* rootSaga() {
   yield all([
@@ -15,5 +16,6 @@ export function* rootSaga() {
     yield fork(configSagas),
     yield fork(installationSagas),
     yield fork(subscriptionsSagas),
+    yield fork(threadsSagas),
   ])
 }

@@ -164,7 +164,7 @@ function* updateLoggedUserOnTools() {
   const githubOAuthToken = selectors.githubOAuthTokenSelector(state)
   const githubAppToken = selectors.githubAppTokenSelector(state)
 
-  github.authenticate(githubOAuthToken || githubAppToken || null)
+  github.authenticate(githubAppToken || githubOAuthToken || null)
 
   analytics.setUser(user && user._id)
   bugsnag.setUser(

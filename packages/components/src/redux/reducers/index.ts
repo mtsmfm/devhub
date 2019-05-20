@@ -8,6 +8,7 @@ import { configReducer } from './config'
 import { githubReducer } from './github'
 import { navigationReducer } from './navigation'
 import { subscriptionsReducer } from './subscriptions'
+import { threadsReducer } from './threads'
 
 const _rootReducer = combineReducers({
   app: appReducer,
@@ -17,6 +18,7 @@ const _rootReducer = combineReducers({
   github: githubReducer,
   navigation: navigationReducer,
   subscriptions: subscriptionsReducer,
+  threads: threadsReducer,
 })
 
 export const rootReducer = (state: any, action: any) => {

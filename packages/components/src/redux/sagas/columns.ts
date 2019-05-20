@@ -1,4 +1,11 @@
-import { all, delay, put, select, takeLatest } from 'redux-saga/effects'
+import {
+  all,
+  delay,
+  put,
+  select,
+  takeLatest,
+  takeEvery,
+} from 'redux-saga/effects'
 
 import {
   ActivityColumnSubscription,
@@ -351,6 +358,20 @@ function* onColumnSubscriptionFilterChange(
   )
 }
 
+function* onShowItemDetail(
+  action: ExtractActionFromActionCreator<typeof actions.showItemDetail>,
+) {
+  yield put(
+    actions.fetchThreadRequest({
+      params: {
+        owner: action.payload.owner,
+        repo: action.payload.repo,
+        number: action.payload.pullRequestNumber!,
+      },
+    }),
+  )
+}
+
 export function* columnsSagas() {
   yield all([
     yield takeLatest('ADD_COLUMN_AND_SUBSCRIPTIONS', onAddColumn),
@@ -367,5 +388,6 @@ export function* columnsSagas() {
       ],
       onColumnSubscriptionFilterChange,
     ),
+    yield takeEvery('SHOW_ITEM_DETAIL', onShowItemDetail),
   ])
 }

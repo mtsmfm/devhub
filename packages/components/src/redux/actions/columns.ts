@@ -125,3 +125,12 @@ export function setColumnClearedAtFilter(payload: {
 }) {
   return createAction('SET_COLUMN_CLEARED_AT_FILTER', payload)
 }
+
+export function showItemDetail(payload: {
+  itemId: string | number
+  owner: string
+  repo: string
+  pullRequestNumber?: number
+}) {
+  return createAction('SHOW_ITEM_DETAIL', payload)
+}
